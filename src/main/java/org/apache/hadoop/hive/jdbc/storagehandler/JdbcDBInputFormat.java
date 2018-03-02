@@ -113,6 +113,11 @@ public class JdbcDBInputFormat<T extends DBWritable>
                 return new MySQLDBRecordReader<T>((DBInputFormat.DBInputSplit) split, inputClass,
                         conf, getConnection(), getDBConf(), conditions, fieldNames,
                         tableName);
+            } else if (dbProductName.startsWith("TERADATA")) {
+                // use TeraData-specific db reader.
+                return new TeradataDBRecordReader<>((DBInputFormat.DBInputSplit) split, inputClass,
+                        conf, getConnection(), getDBConf(), conditions, fieldNames,
+                        tableName);
             } else {
                 // Generic reader.
                 return new GenericDBRecordReader<>((DBInputFormat.DBInputSplit) split, inputClass,
