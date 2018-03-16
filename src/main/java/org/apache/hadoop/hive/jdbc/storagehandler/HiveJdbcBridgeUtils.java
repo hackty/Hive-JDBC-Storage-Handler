@@ -77,6 +77,10 @@ public class HiveJdbcBridgeUtils {
 			return Types.ARRAY;
 		} else if (lctype.startsWith("decimal")) {
 			return Types.DECIMAL;
+		} else if (lctype.contains("byte")) {
+			return Types.VARCHAR;
+		} else if (lctype.contains("char")) {
+			return Types.VARCHAR;
 		}
 		throw new SerDeException("Unrecognized column type: " + hiveType);
 	}

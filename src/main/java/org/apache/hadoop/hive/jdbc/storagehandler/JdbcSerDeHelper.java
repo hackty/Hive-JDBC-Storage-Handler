@@ -146,6 +146,10 @@ public class JdbcSerDeHelper {
             return "BINARY";
         } else if (lctype.startsWith("array")) {
             return "ARRAY<";
+        } else if (lctype.contains("byte")) {
+            return "STRING";
+        } else if (lctype.contains("char")) {
+            return "STRING";
         }
         throw new SerDeException("Unrecognized column type: " + sqlType);
 
